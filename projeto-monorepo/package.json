@@ -1,0 +1,21 @@
+{
+    "name": "projeto-monorepo-iec",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "docker:build-api": "docker build -t api-service ./backend",
+        "docker:build-app": "docker build -t app-service ./app",
+        "compose:up": "docker compose up -d",
+        "compose:down": "docker compose down",
+        "compose:logs": "docker compose logs -f"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.39.5",
+        "eslint": "^9.39.5",
+        "eslint-config-prettier": "^10.1.8",
+        "globals": "^17.12.0",
+        "prettier": "^3.9.6",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.69.0"
+    }
+}
