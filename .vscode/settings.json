@@ -2,7 +2,7 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSaveTimeout": 3000,
+  "editor.codeActionsOnSaveTimeout": 1000,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
@@ -22,10 +22,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ],
-  "DockerRun.DisableDockerrc": true
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }

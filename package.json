@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run docker:build-api\" \"npm run docker:build-app\"",
-    "build": "npm run docker:build-api && npm run docker:build-app",
-    "type-check": "tsc --noEmit",
     "docker:build-api": "docker build -t api-service ./backend",
     "docker:build-app": "docker build -t app-service ./app",
     "compose:up": "docker compose up -d",
@@ -14,13 +11,6 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.5",
-    "eslint": "^10.9.1",
-    "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.12.0",
-    "husky": "^9.1.7",
-    "prettier": "^3.9.6",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.69.0"
+    "husky": "^9.1.7"
   }
 }
