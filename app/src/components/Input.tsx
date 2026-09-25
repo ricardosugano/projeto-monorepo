@@ -31,16 +31,9 @@ export function Input({
         textAlign: "left",
       }}
     >
-      <label
-        style={{
-          fontWeight: 600,
-          fontSize: "14px",
-        }}
-      >
-        {label}
-        {required && " *"}
+      <label style={{ fontWeight: 600, fontSize: "0.9rem", color: "#374151" }}>
+        {label} {required && <span style={{ color: "#dc2626" }}>*</span>}
       </label>
-
       <input
         type={type}
         value={value}
@@ -48,24 +41,21 @@ export function Input({
         placeholder={placeholder}
         required={required}
         style={{
-          padding: "10px 12px",
+          padding: "8px 12px",
           borderRadius: "6px",
-          border: error ? "1px solid red" : "1px solid #ccc",
-          fontSize: "14px",
+          border: `1px solid ${error ? "#dc2626" : "#d1d5db"}`,
+          outline: "none",
+          fontSize: "1rem",
+          transition: "border-color 0.2s",
         }}
       />
-
-      {error && (
-        <span style={{ fontSize: "12px" }}>
-          {error}
-        </span>
-      )}
-
-      {!error && helperText && (
-        <span style={{ fontSize: "12px" }}>
+      {error ? (
+        <span style={{ fontSize: "0.8rem", color: "#dc2626" }}>{error}</span>
+      ) : helperText ? (
+        <span style={{ fontSize: "0.8rem", color: "#6b7280" }}>
           {helperText}
         </span>
-      )}
+      ) : null}
     </div>
   );
 }

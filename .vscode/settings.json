@@ -22,10 +22,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ],
-  "DockerRun.DisableDockerrc": true
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }
