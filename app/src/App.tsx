@@ -5,7 +5,6 @@ import { Input } from "./components/Input";
 import { UserTable } from "./components/UserTable";
 import { userService } from "./services/api";
 import type { User } from "./types/user";
-import { useFormState } from "react-dom";
 
 export default function App() {
   const [usuarios, setUsuarios] = useState<User[]>([]);
@@ -18,8 +17,6 @@ export default function App() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const [carregando, setCarregando] = useState<boolean>(true);
-  const [erro, setErro] = useState<string | null>(null);
   const [gatilhoRecarga, setGatilhoRecarga] = useState<number>(0);
 
   // Efeito execcutado na inicialização e sempre que o gatilho de recarga for acionado
@@ -112,6 +109,105 @@ export default function App() {
           <strong>Aviso:</strong> {mensagemErro}
         </div>
       )}
+
+      {/* Layout em Grid de 2 Colunas */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 2fr",
+          gap: "32px",
+          alignItems: "start",
+        }}
+      >
+        {/* Coluna 1: Formulário de Cadastro */}
+        <div
+          style={{
+            backgroundColor: "#ffffff",
+            padding: "20px",
+            borderRadius: "10px",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+            border: "1px solid #e5e7eb",
+          }}
+        >
+          <h2
+            style={{
+              margin: "0 0 16px 0",
+              fontSize: "1.2rem",
+              color: "#374151",
+            }}
+          >
+            Novo Usuário
+          </h2>
+
+          <form onSubmit={handleSubmit}>
+            <Input
+              label="Nome Completo"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              placeholder="Ex: Mariana Silva"
+              required
+            />
+            <Input
+              label="E-mail"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="usuario@dominio.com"
+              required
+            />
+            <Input
+              label="Senha de Acesso"
+              type="password"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              placeholder="Minimo de 6 caracteres"
+              required
+            />
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="md"
+              isLoading={enviandoForm}
+            >
+              Cadastrar Usuário
+            </Button>
+          </form>
+        </div>
+
+        {/* Coluna 2: Tabela de Usuários */}
+        <div
+          style={{
+            backgroundColor: "#ffffff",
+            padding: "20px",
+            borderRadius: "10px",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+            border: "1px solid #e5e7eb",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "12px",
+            }}
+          >
+            <h2 style={{ margin: 0, fontSize: "1.2rem", color: "#374151" }}>
+              Usuários Cadastrados
+            </h2>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setGatilhoRecarga((prev) => prev + 1)}
+              disabled={carregandoLista}
+            >
+              Atualizar Lista
+            </Button>
+          </div>
+          <UserTable usuarios={usuarios} carregando={carregandoLista} />
+        </div>
+      </div>
     </div>
   );
 }
