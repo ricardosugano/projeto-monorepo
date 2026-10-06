@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AppLayout } from "./components/AppLayout";
+
 
 function Home() {
   return (
@@ -25,6 +27,7 @@ function Sobre() {
 export default function App() {
   return (
     <BrowserRouter>
+    <Routes>
     <nav>
       <Link to="/">Inicio</Link>
       <Link to="/sobre">Sobre</Link>
@@ -32,6 +35,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sobre" element={<Sobre />} />
+      </Routes>
       </Routes>
     </BrowserRouter>
   );
