@@ -2,31 +2,19 @@ export interface User {
   id: number;
   nome: string;
   email: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface UserCreationAttributes {
-  nome: string;
-  email: string;
-  senha_hash: string;
-}
-
-export interface UserUpdateAttributes {
-  nome?: string;
-  email?: string;
-  senha_hash?: string;
+  perfil?: "admin" | "usuario";
 }
 
 export interface LoginCredentials {
   email: string;
-  senha: string;
+  password: string;
 }
 
 export interface AuthContextType {
   user: User | null;
-  login: (credentials: LoginCredentials) => Promise<void>;
-  logout: () => void;
+  token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  login: (credentials: LoginCredentials) => Promise<void>;
+  logout: () => void;
 }

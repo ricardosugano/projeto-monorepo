@@ -1,45 +1,40 @@
 import { Outlet, Link } from "react-router-dom";
-import { AppLayout } from "./AppLayout";
 import { useAuth } from "../hooks/useAuth";
 
 export function AppLayout() {
-  const { isAuthenticated } = useAuth();
-  
-}
+  const { user, logout } = useAuth();
 
-function Dashboard() {
-    return (
-    <h2 className="text-xl font-bold text-slate-800">Painel Principal</h2>;
-    );
-}
-
-function Perfil() {
-    return (
-    <h2 className="text-xl font-bold text-slate-800">Perfil do Usuário</h2>
-    );
-}
-
-
-export function AppLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
-        <header className="bg-gray-800 text-white p-4">
-          <h1 className="text-2xl font-bold">Sistema Web</h1>
-          <span className="font-bold">Welcome to My App</span>
+      <header className="bg-white border-b px-6 py-4 flex justify-between items-center">
+        <div className="flex items-center gap-6">
+          <span className="font-bold text-slate-800">Sistema Web</span>
+          <nav className="flex gap-4 text-sm font-medium text-slate-600">
+            <Link to="/dashboard" className="hover:text-blue-600">
+              Painel
+            </Link>
+            <Link to="/perfil" className="hover:text-blue-600">
+              Perfil
+            </Link>
+          </nav>
+        </div>
 
-        </header>
-
-      <main className="flex-1 max-w-6x1 w-full mx-auto p-6">
-        <Link to="/" className="mr-4 hover:underline">
-          Inicio
-        </Link>
-        <Link to="/sobre" className="hover:underline">
-          Sobre
-        </Link>
-      </main>
-      <main className="flex-grow">
+        <div className="flex items-center gap-4 text-sm">
+          <span className="text-slate-600 font-medium">
+            {user?.nome || user?.email}
+          </span>
+          <button
+            onClick={logout}
+            className="text-red-600 hover:text-red-700 font-medium transition-colors"
+          >
+            Sair
+          </button>
+        </div>
+      </header>
+      <main className="flex-1 max-w-6xl w-full mx-auto p-6">
+        {/* As rotas filhas serão renderizadas aqui */}
         <Outlet />
       </main>
     </div>
   );
-}   
+}

@@ -22,12 +22,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ],
-  "DockerRun.DisableDockerrc": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }],
 
   "tailwindCSS.experimental.configFile": "app/src/index.css",
   "tailwindCSS.experimental.classRegex": [

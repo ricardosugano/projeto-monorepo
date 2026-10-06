@@ -1,41 +1,29 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppLayout } from "./components/AppLayout";
 
-
-function Home() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-4xl font-bold">Welcome to the Home Page</h1>
-      <Link to="/about" className="mt-4 text-blue-500 hover:underline">
-        Go to About Page
-      </Link>
-    </div>
-  );
+function Dashboard() {
+  return <h2 className="text-xl font-bold text-slate-800">Painel Principal</h2>;
 }
 
-function Sobre() {
+function Perfil() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-4xl font-bold">Sobre Nós</h1>
-      <Link to="/" className="mt-4 text-blue-500 hover:underline">
-        Voltar para Home
-      </Link>
-    </div>
+    <h2 className="text-xl font-bold text-slate-800">Perfil do Usuário</h2>
   );
 }
 
 export default function App() {
   return (
     <BrowserRouter>
-    <Routes>
-    <nav>
-      <Link to="/">Inicio</Link>
-      <Link to="/sobre">Sobre</Link>
-    </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sobre" element={<Sobre />} />
-      </Routes>
+        {/* O AppLayout envolvera todas as rotas filhas declaradas aqui dentro */}
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/perfil" element={<Perfil />} />
+        </Route>
+
+        {/* Redirecionamento de segurança para qualquer rota desconhecida */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   );
