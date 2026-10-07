@@ -6,5 +6,9 @@ export default defineConfig({
     environment: 'node',
     include: ['src/**/*.test.ts', 'src/**/*.spec.ts'],
     exclude: ['node_modules', 'dist'],
+    // Garante o SQLite em memoria tambem nas execucoes locais (pnpm test)
+    env: {
+      NODE_ENV: 'test',
+    },
   },
 });

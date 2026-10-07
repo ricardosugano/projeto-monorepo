@@ -51,7 +51,7 @@ describe('Testes de Rotas com Mocking do Model User', () => {
     });
   });
 
-  it('POST /api/users - deve retornar status 409 quando o e-mail ja existir', async () => {
+  it('POST /api/users - deve retornar status 400 quando o e-mail ja existir', async () => {
     // Arrange: Simula que o findOne encontrou um usuario com o mesmo e-mail
     vi.mocked(User.findOne).mockResolvedValue({
       id: 10,
