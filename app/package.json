@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
+    "coverage": "vitest run --coverage",
+    "test": "vitest run"
   },
   "dependencies": {
     "clsx": "^2.1.1",

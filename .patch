@@ -1,0 +1,4 @@
+git am 0001-test-ci-SQLite-em-memoria-nos-testes-de-integracao-e.patch
+git rm --cached backend/.env      # para de versionar o .env (o arquivo local continua)
+git commit -m "chore: remove .env do versionamento"
+git push
