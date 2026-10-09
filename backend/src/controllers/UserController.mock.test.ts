@@ -357,9 +357,7 @@ describe('UserController - Testes com Mock', () => {
 
       // Assert
       expect(response.status).toBe(404);
-      expect(response.body.erro).toBe(
-        'O campo nome deve ser um texto valido.',
-      );
+      expect(response.body.erro).toBe('O campo nome deve ser um texto valido.');
     });
 
     it('deve retornar 404 quando o nome informado não for uma string', async () => {
@@ -378,9 +376,7 @@ describe('UserController - Testes com Mock', () => {
 
       // Assert
       expect(response.status).toBe(404);
-      expect(response.body.erro).toBe(
-        'O campo nome deve ser um texto valido.',
-      );
+      expect(response.body.erro).toBe('O campo nome deve ser um texto valido.');
     });
 
     it('deve retornar 400 quando o email tiver formato inválido', async () => {

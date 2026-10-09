@@ -18,7 +18,11 @@ function makeMockReq(authHeader?: string): Partial<Request> {
   };
 }
 
-function makeMockRes(): { res: Partial<Response>; status: ReturnType<typeof vi.fn>; json: ReturnType<typeof vi.fn> } {
+function makeMockRes(): {
+  res: Partial<Response>;
+  status: ReturnType<typeof vi.fn>;
+  json: ReturnType<typeof vi.fn>;
+} {
   const json = vi.fn().mockReturnThis();
   const status = vi.fn().mockReturnValue({ json });
   const res: Partial<Response> = { status } as any;
