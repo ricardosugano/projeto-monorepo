@@ -37,6 +37,5 @@
     "strings": "on"
   },
   "inlineFold.regex": "(class|className)=[\"']([^\"']*)[\"']",
-  "inlineFold.autoFold": true,
-  "DockerRun.DisableDockerrc": true
+  "inlineFold.autoFold": true
 }

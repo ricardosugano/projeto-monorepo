@@ -7,9 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "coverage": "vitest run --coverage",
-    "test": "vitest run"
+    "preview": "vite preview"
   },
   "dependencies": {
     "clsx": "^2.1.1",

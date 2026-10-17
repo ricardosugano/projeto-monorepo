@@ -28,6 +28,8 @@ jobs:
     steps:
       - name: 1. Baixar o código-fonte
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Necessário para acessar o histórico completo do repositório
 
       - name: 2. Habilitar o pnpm
         uses: pnpm/action-setup@v4
@@ -73,6 +75,9 @@ jobs:
     steps:
       - name: 1. Baixar o código-fonte
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Necessário para acessar o histórico completo do Git
+
 
       - name: 2. Habilitar o pnpm
         uses: pnpm/action-setup@v4
@@ -110,9 +115,41 @@ jobs:
             echo "Subprojeto app ainda não adicionado ao monorepo."
           fi
 
+      - name: 8. Validar Construção da Imagem Docker do Frontend (quando presente)
+        run: |
+          if [ -d "app" ]; then
+            docker build -t app-service:test ./app
+          else 
+            echo "Subprojeto app ainda não adicionado ao monorepo."
+          fi
+
+      - name: Executar testes unitários e de integração de Vitest
+        run: |
+          cd backend
+          pnpm run test:coverage
+        env:
+          NODE_ENV: test
+
+      - name: 9. EXECUTAR ANÁLISE ESTÁTICA DE CÓDIGO COM SONARQUBE
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.projectKey=projeto-monorepo
+            -Dsonar.organization=seu-usuario-ou-organizacao
+            -Dsonar.host.url=https://sonarcloud.io
+        
+      - name: 10. validar SONARQUBE quality gate
+        uses: sonarsource/sonarcloud-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      -name: 11. 
+
       - name: 8. Resumo da Execução
         run: |
           echo "### Resumo da Execução do Pipeline de CI" >> $GITHUB_STEP_SUMMARY
           echo "Integração Contínua concluída com sucesso!" >> $GITHUB_STEP_SUMMARY
           echo "- Autor: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          
