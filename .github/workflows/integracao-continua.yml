@@ -66,6 +66,52 @@ jobs:
           cd backend
           pnpm run test:run
 
+        - name: 8. Validar Construção da Imagem Docker do Frontend (quando presente)
+        run: |
+          if [ -d "app" ]; then
+            docker build -t app-service:test ./app
+          else 
+            echo "Subprojeto app ainda não adicionado ao monorepo."
+          fi
+
+      - name: Executar testes unitários e de integração de Vitest
+        run: |
+          cd backend
+          pnpm run test:coverage
+        env:
+          NODE_ENV: test
+
+      - name: 9. EXECUTAR ANÁLISE ESTÁTICA DE CÓDIGO COM SONARQUBE
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.projectKey=projeto-monorepo
+            -Dsonar.organization=seu-usuario-ou-organizacao
+            -Dsonar.host.url=https://sonarcloud.io
+        
+      - name: 10. validar SONARQUBE quality gate
+        uses: sonarsource/sonarcloud-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      -name: 11. publicar relatório de cobertura no resumo do jobs
+        if: always()
+        run: |
+          echo "### Relatório de Cobertura de Testes" >> $GITHUB_STEP_SUMMARY
+          echo "Cobertura de testes do backend:" >> $GITHUB_STEP_SUMMARY
+          cat backend/coverage/lcov-report/index.html | grep -oP '(?<=<td class="headerCov">)[^<]+  '
+          $GITHUB_STEP_SUMMARY
+          echo "Execução de testes e inspeção estática concluidas para commit ${{ github.sha }}." >> $GITHUB_STEP_SUMMARY
+          echo "Relatório LCOV enviado para o SonarQube." >> $GITHUB_STEP_SUMMARY
+
+      - name: 12. salvar artefatos de build e cobertura
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-build-and-coverage
+
+
   # Job 2: Compilação de Produção e Imagens Docker (Só executa se o Job 1 passar)
   build-e-docker:
     name: 2. Compilação e Imagens Docker
@@ -115,37 +161,8 @@ jobs:
             echo "Subprojeto app ainda não adicionado ao monorepo."
           fi
 
-      - name: 8. Validar Construção da Imagem Docker do Frontend (quando presente)
-        run: |
-          if [ -d "app" ]; then
-            docker build -t app-service:test ./app
-          else 
-            echo "Subprojeto app ainda não adicionado ao monorepo."
-          fi
 
-      - name: Executar testes unitários e de integração de Vitest
-        run: |
-          cd backend
-          pnpm run test:coverage
-        env:
-          NODE_ENV: test
-
-      - name: 9. EXECUTAR ANÁLISE ESTÁTICA DE CÓDIGO COM SONARQUBE
-        uses: sonarsource/sonarcloud-github-action@master
-        with:
-          args: >
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.projectKey=projeto-monorepo
-            -Dsonar.organization=seu-usuario-ou-organizacao
-            -Dsonar.host.url=https://sonarcloud.io
-        
-      - name: 10. validar SONARQUBE quality gate
-        uses: sonarsource/sonarcloud-quality-gate-action@master
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      -name: 11. 
+      
 
       - name: 8. Resumo da Execução
         run: |
