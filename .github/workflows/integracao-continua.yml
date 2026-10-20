@@ -29,7 +29,7 @@ jobs:
       - name: 1. Baixar o código-fonte
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Necessário para acessar o histórico completo do repositório
+          fetch-depth: 0 # Necessário para o SonarQube analisar o histórico de commits
 
       - name: 2. Habilitar o pnpm
         uses: pnpm/action-setup@v4
@@ -64,53 +64,40 @@ jobs:
       - name: 8. Executar Testes Unitários e de Integração com Vitest
         run: |
           cd backend
-          pnpm run test:run
-
-        - name: 8. Validar Construção da Imagem Docker do Frontend (quando presente)
-        run: |
-          if [ -d "app" ]; then
-            docker build -t app-service:test ./app
-          else 
-            echo "Subprojeto app ainda não adicionado ao monorepo."
-          fi
-
-      - name: Executar testes unitários e de integração de Vitest
-        run: |
-          cd backend
           pnpm run test:coverage
         env:
           NODE_ENV: test
 
-      - name: 9. EXECUTAR ANÁLISE ESTÁTICA DE CÓDIGO COM SONARQUBE
-        uses: sonarsource/sonarcloud-github-action@master
+      - name: 9. Executar Análise Estática com SonarQube
+        uses: sonarsource/sonarqube-scan-action@v4
         with:
-          args: >
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.projectKey=projeto-monorepo
-            -Dsonar.organization=seu-usuario-ou-organizacao
-            -Dsonar.host.url=https://sonarcloud.io
-        
-      - name: 10. validar SONARQUBE quality gate
-        uses: sonarsource/sonarcloud-quality-gate-action@master
+          projectBaseDir: backend
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      - name: 10. Validar SonarQube Quality Gate
+        uses: sonarsource/sonarqube-quality-gate-action@v1
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      -name: 11. publicar relatório de cobertura no resumo do jobs
+      - name: 11. Publicar Relatório de Cobertura no Resumo do Job
         if: always()
         run: |
-          echo "### Relatório de Cobertura de Testes" >> $GITHUB_STEP_SUMMARY
-          echo "Cobertura de testes do backend:" >> $GITHUB_STEP_SUMMARY
-          cat backend/coverage/lcov-report/index.html | grep -oP '(?<=<td class="headerCov">)[^<]+  '
-          $GITHUB_STEP_SUMMARY
-          echo "Execução de testes e inspeção estática concluidas para commit ${{ github.sha }}." >> $GITHUB_STEP_SUMMARY
-          echo "Relatório LCOV enviado para o SonarQube." >> $GITHUB_STEP_SUMMARY
+          echo "## Relatório de Cobertura de Código e Análise Estática" >> $GITHUB_STEP_SUMMARY
+          echo "Execução de testes e inspeção estática concluídas para commit \`${{ github.sha }}\`." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Relatório LCOV enviado para o SonarQube com sucesso." >> $GITHUB_STEP_SUMMARY
+          echo "Os relatórios detalhados em HTML foram salvos como artefato desta execução." >> $GITHUB_STEP_SUMMARY
 
-      - name: 12. salvar artefatos de build e cobertura
-        uses: actions/upload-artifact@v3
+      - name: 12. Salvar Artefatos de Cobertura (HTML e LCOV)
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: backend-build-and-coverage
-
+          name: coverage-report-backend
+          path: backend/coverage
+          retention-days: 14
 
   # Job 2: Compilação de Produção e Imagens Docker (Só executa se o Job 1 passar)
   build-e-docker:
@@ -121,9 +108,6 @@ jobs:
     steps:
       - name: 1. Baixar o código-fonte
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Necessário para acessar o histórico completo do Git
-
 
       - name: 2. Habilitar o pnpm
         uses: pnpm/action-setup@v4
@@ -161,12 +145,9 @@ jobs:
             echo "Subprojeto app ainda não adicionado ao monorepo."
           fi
 
-
-      
-
       - name: 8. Resumo da Execução
         run: |
           echo "### Resumo da Execução do Pipeline de CI" >> $GITHUB_STEP_SUMMARY
           echo "Integração Contínua concluída com sucesso!" >> $GITHUB_STEP_SUMMARY
           echo "- Autor: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          
+          echo "- Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
