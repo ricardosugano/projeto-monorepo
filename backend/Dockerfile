@@ -1,31 +1,42 @@
-# 1. Define a imagem de origem base 
-FROM node:24-alpine
+# Estágio 1: Build da Aplicação
 
-# Configura o diretório global do pnpm
-ENV PNPM_HOME="/root/.local/share/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+# 1. Define a imagem de origem base 
+FROM node:20-alpine AS builder
+
+# instalção do pnpm globalmente para gerenciar as dependências
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # 2. Define diretório de trabalho interno do container
 WORKDIR /app
 
-# 3. Instalar o pnpm globalmente para gerenciar as dependências
-RUN npm install -g pnpm
+# Copia dos manifestos de dependências do backend para o diretório de trabalho do container
+COPY package.json pnpm-lock.yaml ./
 
-# Desativa a restrição do pnpm 11
-RUN pnpm config set strict-dep-builds false
+# instalação de todas  as dependencias (incluindo devDependencies) do backend
+RUN pnpm install --frozen-lockfile
 
-# 4. Copia apenas o manifesto de dependências
-COPY package.json ./
+# cópia do código-fonte e da configuração do typescript para o diretório de trabalho do container
+COPY tsconfig.json ./
+COPY src ./src
 
-# 5. Instalar as dependências do projeto
-RUN pnpm install
+# compilação do TypeScript para JavaScript, gerando os arquivos de saída no diretório dist
+RUN pnpm run build
 
-# 6. Copiat todo os restante do código
-COPY . .
+# remoção das dependências de desenvolvimento para otimizar o tamanho da imagem final
+RUN pnpm prune --prod
 
-# 7. Expoe a porta padrão LDW
+# Estágio 2: Criação da Imagem Final
+
+FROM node:20-alpine AS runtime
+
+WORKDIR /app
+
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+
+RUN pnpm install --frozen-lockfile --prod
+
 EXPOSE 3000
 
-# 8. Comando para inicializar a aplicação
-CMD ["pnpm", "dev"]
-
+CMD ["node", "dist/index.js"]   
