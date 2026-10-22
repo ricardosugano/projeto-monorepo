@@ -74,7 +74,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=projeto-monorepo
-            -Dsonar.organization=seu-usuario-ou-organizacao
+            -Dsonar.organization=ricardosugano
             -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info
 
       - name: 10. Validar Quality Gate do SonarQube
