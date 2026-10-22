@@ -1,14 +1,14 @@
 name: Monorepo CI Pipeline
 
 on:
-  # Dispara automaticamente ao enviar novos commits para a branch main
+  # Dispara automaticamente ao enviar novos commits para a branch master
   push:
     branches:
-      - main
-  # Dispara na abertura ou atualização de Pull Requests direcionados para a branch main
+      - master
+  # Dispara na abertura ou atualização de Pull Requests direcionados para a branch master
   pull_request:
     branches:
-      - main
+      - master
   # Permite execução manual pelo painel web do Github Actions
   workflow_dispatch:
 
@@ -29,7 +29,7 @@ jobs:
       - name: 1. Baixar o código-fonte
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Necessário para o SonarQube analisar o histórico de commits
+          fetch-depth: 0  # Necessário para o SonarQube analisar o histórico
 
       - name: 2. Habilitar o pnpm
         uses: pnpm/action-setup@v4
@@ -61,49 +61,47 @@ jobs:
           cd backend
           pnpm run type-check
 
-      - name: 8. Executar Testes Unitários e de Integração com Vitest
+      - name: 8. Executar Testes Unitários e de Integração com Vitest (com cobertura)
         run: |
           cd backend
           pnpm run test:coverage
-        env:
-          NODE_ENV: test
 
-      - name: 9. Executar Análise Estática com SonarQube
-        uses: sonarsource/sonarqube-scan-action@v4
-        with:
-          projectBaseDir: backend
+      - name: 9. Executar Análise Estática de Código com SonarQube
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
-      - name: 10. Validar SonarQube Quality Gate
-        uses: sonarsource/sonarqube-quality-gate-action@v1
+          SONAR_HOST_URL: https://sonarcloud.io
         with:
-          scanMetadataReportFile: backend/.scannerwork/report-task.txt
-          failIfQualityGateFails: true
-          # Definindo um tempo limite de 5 minutos para a validação do Quality Gate
+          args: >
+            -Dsonar.projectKey=projeto-monorepo
+            -Dsonar.organization=seu-usuario-ou-organizacao
+            -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info
+
+      - name: 10. Validar Quality Gate do SonarQube
+        uses: SonarSource/sonarqube-quality-gate-action@v1
         timeout-minutes: 5
-        continue-on-error: true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
       - name: 11. Publicar Relatório de Cobertura no Resumo do Job
         if: always()
         run: |
-          echo "## Relatório de Cobertura de Código e Análise Estática" >> $GITHUB_STEP_SUMMARY
-          echo "Execução de testes e inspeção estática concluídas para commit \`${{ github.sha }}\`." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Relatório LCOV enviado para o SonarQube com sucesso." >> $GITHUB_STEP_SUMMARY
-          echo "Os relatórios detalhados em HTML foram salvos como artefato desta execução." >> $GITHUB_STEP_SUMMARY
+          echo "### Relatório de Cobertura de Testes" >> $GITHUB_STEP_SUMMARY
+          if [ -f backend/coverage/lcov.info ]; then
+            echo "Relatório de cobertura do backend gerado com sucesso." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Relatório de cobertura não encontrado." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "Execução de testes e inspeção estática concluídas para o commit ${{ github.sha }}." >> $GITHUB_STEP_SUMMARY
 
-      - name: 12. Salvar Artefatos de Cobertura (HTML e LCOV)
-        uses: actions/upload-artifact@v4
+      - name: 12. Salvar Artefatos de Cobertura
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: coverage-report-backend
+          name: backend-coverage
           path: backend/coverage
-          retention-days: 14
+          if-no-files-found: warn
 
   # Job 2: Compilação de Produção e Imagens Docker (Só executa se o Job 1 passar)
   build-e-docker:
@@ -139,15 +137,16 @@ jobs:
         run: |
           docker build -t api-service:test ./backend
 
-      - name: 7. Validar Frontend (quando presente no monorepo)
+      - name: 7. Validar Frontend e sua Imagem Docker (quando presente no monorepo)
         run: |
           if [ -d "app" ]; then
             echo "Subprojeto frontend encontrado. Iniciando validação..."
             cd app
             pnpm install --frozen-lockfile
             pnpm run build
-            # docker build -t app-service:test .
-          else 
+            cd ..
+            docker build -t app-service:test ./app
+          else
             echo "Subprojeto app ainda não adicionado ao monorepo."
           fi
 
@@ -156,4 +155,3 @@ jobs:
           echo "### Resumo da Execução do Pipeline de CI" >> $GITHUB_STEP_SUMMARY
           echo "Integração Contínua concluída com sucesso!" >> $GITHUB_STEP_SUMMARY
           echo "- Autor: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
