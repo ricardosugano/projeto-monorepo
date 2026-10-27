@@ -1,15 +1,21 @@
 // src/pages/Login.tsx
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 export function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [erro, setErro] = useState<string | null>(null);
   const [submetendo, setSubmetendo] = useState(false);
 
@@ -18,14 +24,16 @@ export function Login() {
   const location = useLocation();
 
   // Recupera a rota tentada anteriormente ou usa /dashboard como padrao
-  const rotaDestino = (location.state as { from?: { pathname: string } })?.from?.pathname || '/dashboard';
+  const rotaDestino =
+    (location.state as { from?: { pathname: string } })?.from?.pathname ||
+    "/dashboard";
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setErro(null);
 
     if (!email || !password) {
-      setErro('Informe o e-mail e a senha.');
+      setErro("Informe o e-mail e a senha.");
       return;
     }
 
@@ -34,7 +42,11 @@ export function Login() {
       await login({ email, password });
       navigate(rotaDestino, { replace: true });
     } catch (err) {
-      setErro(err instanceof Error ? err.message : 'Credenciais inválidas ou falha ao autenticar.');
+      setErro(
+        err instanceof Error
+          ? err.message
+          : "Credenciais inválidas ou falha ao autenticar.",
+      );
     } finally {
       setSubmetendo(false);
     }
@@ -44,8 +56,12 @@ export function Login() {
     <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
       <Card className="w-full max-w-md shadow-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Entrar no Sistema</CardTitle>
-          <CardDescription>Acesse o painel utilizando suas credenciais de acesso</CardDescription>
+          <CardTitle className="text-2xl font-bold">
+            Entrar no Sistema
+          </CardTitle>
+          <CardDescription>
+            Acesse o painel utilizando suas credenciais de acesso
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -63,7 +79,9 @@ export function Login() {
                 type="email"
                 placeholder="seu.email@fatec.sp.gov.br"
                 value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setEmail(e.target.value)
+                }
                 disabled={submetendo}
                 required
               />
@@ -76,14 +94,16 @@ export function Login() {
                 type="password"
                 placeholder="Digite sua senha"
                 value={password}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
                 disabled={submetendo}
                 required
               />
             </div>
 
             <Button type="submit" className="w-full mt-2" disabled={submetendo}>
-              {submetendo ? 'Entrando...' : 'Entrar'}
+              {submetendo ? "Entrando..." : "Entrar"}
             </Button>
           </form>
         </CardContent>

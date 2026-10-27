@@ -21,10 +21,10 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    // .. outras propriedades existentes
+    // ... outras propriedades existentes
     "paths": {
       "@/*": ["./src/*"]
-    } 
+    }
   },
   "include": ["src"]
 }

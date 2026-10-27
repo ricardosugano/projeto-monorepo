@@ -1,29 +1,27 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Minha Aplicação SPA</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR" class="scroll-smooth">
   <head>
+    <!-- Metadados de Indexacao e SEO Primario -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Metadados Sociais Open Graph (Facebook, LinkedIn, WhatsApp) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ricardosugano.github.io/projeto-monorepo/" />
-    <meta property="og:title" content="PlatformHub | Gestão Ágil e Automação de Projetos" />
+    <title>PlatformHub | Gestão Ágil e Automação de Projetos</title>
     <meta
-      property="og:description"
-      content="Acelere o ciclo de entrega da sua equipe com o PlatformHub. Orquestração ágil de sprints, autenticação segura e monitoramento em tempo real."
+      name="description"
+      content="Acelere o ciclo de entrega da sua equipe com o PlatformHub. Orquestração ágil de sprints, autenticação segura e monitoramento em tempo real em um único ambiente."
     />
+    <meta
+      name="keywords"
+      content="gestão ágil, projetos de software, scrum, kanban, react, typescript, api rest"
+    />
+    <meta name="author" content="Equipe DSM FATEC" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://i-davies.github.io/projeto-monorepo/" />
+
+    <!-- Metadados Sociais Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://i-davies.github.io/projeto-monorepo/" />
+    <meta property="og:title" content="PlatformHub | Gestão Ágil e Automação de Projetos" />
+    <meta property="og:description" content="Acelere o ciclo de entrega da sua equipe com o PlatformHub. Orquestração ágil de sprints, autenticação segura e monitoramento em tempo real." />
     <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=630&q=80" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -31,44 +29,124 @@
 
     <!-- Metadados Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://seu-usuario.github.io/projeto-monorepo/" />
+    <meta name="twitter:url" content="https://i-davies.github.io/projeto-monorepo/" />
     <meta name="twitter:title" content="PlatformHub | Gestão Ágil e Automação de Projetos" />
-    <meta
-      name="twitter:description"
-      content="Orquestração ágil de sprints, autenticação segura e monitoramento em tempo real."
-    />
+    <meta name="twitter:description" content="Orquestração ágil de sprints, autenticação segura e monitoramento em tempo real." />
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=630&q=80" />
 
-    <!-- Google Fonts: Inter e Plus Jakarta Sans -->
+    <!-- Rich Snippets JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PlatformHub",
+        "url": "https://i-davies.github.io/projeto-monorepo/",
+        "description": "Plataforma de orquestração ágil de projetos com autenticação JWT e métricas em tempo real.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+        "creator": { "@type": "Organization", "name": "Equipe DSM FATEC" }
+      }
+    </script>
+
+    <!-- Favicon Vetorial -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235e6ad2'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>"
+      type="image/svg+xml"
+    />
+
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Tailwind CSS via CDN Oficial com Script de Customizacao -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ============================================================
+         DESIGN SYSTEM TOKENS — Linear v4
+         ============================================================ -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
+            /* --- Tipografia --- */
             fontFamily: {
-              sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+              sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+              mono: ["SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
             },
+
+            /* --- Paleta Linear --- */
             colors: {
-              brand: {
-                50: '#eef2ff',
-                100: '#e0e7ff',
-                200: '#c7d2fe',
-                300: '#a5b4fc',
-                400: '#818cf8',
-                500: '#6366f1',
-                600: '#4f46e5',
-                700: '#4338ca',
-                800: '#3730a3',
-                900: '#312e81',
+              /* Fundo e superfícies */
+              void:    "#0f0f13",
+              surface: "#18181f",
+              "surface-hover": "#22222b",
+
+              /* Acento principal */
+              linear: {
+                DEFAULT: "#5e6ad2",
+                hover:   "#6b77e8",
               },
+
+              /* Textos */
+              "text-primary":   "#eeeeee",
+              "text-secondary": "#8a8f98",
+
+              /* Bordas */
+              "border-subtle": "rgba(255,255,255,0.08)",
+            },
+
+            /* --- Tipografia customizada --- */
+            fontSize: {
+              display: ["56px", { lineHeight: "1.1",  letterSpacing: "-0.04em", fontWeight: "600" }],
+              h1:      ["36px", { lineHeight: "1.2",  letterSpacing: "-0.02em", fontWeight: "600" }],
+              body:    ["15px", { lineHeight: "1.6",  letterSpacing: "0"       }],
+            },
+
+            /* --- Espaçamento Linear (base 4px) --- */
+            spacing: {
+              1:  "4px",
+              2:  "8px",
+              3:  "12px",
+              4:  "16px",
+              6:  "24px",
+              8:  "32px",
+              12: "48px",
+              16: "64px",
+              20: "80px",
+              24: "96px",
+              32: "128px",
+            },
+
+            /* --- Border Radius Linear --- */
+            borderRadius: {
+              sm: "4px",
+              md: "8px",
+              lg: "12px",
+              xl: "16px",
+              "2xl": "20px",
+              full: "9999px",
+            },
+
+            /* --- Sombras / Glow --- */
+            boxShadow: {
+              glow:    "0 0 20px rgba(94, 106, 210, 0.3)",
+              "glow-lg": "0 0 40px rgba(94, 106, 210, 0.25)",
+            },
+
+            /* --- Breakpoints --- */
+            screens: {
+              sm:  "640px",
+              md:  "768px",
+              lg:  "1024px",
+              xl:  "1280px",
+              "2xl": "1536px",
             },
           },
         },
@@ -76,391 +154,1047 @@
     </script>
 
     <style>
+      /* ── Reset base ── */
+      *, *::before, *::after { box-sizing: border-box; }
+
       body {
+        background-color: #0f0f13;
+        color: #eeeeee;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+
+      /* ── Tokens como variáveis CSS (fallback p/ utilitários inline) ── */
+      :root {
+        --color-void:           #0f0f13;
+        --color-surface:        #18181f;
+        --color-surface-hover:  #22222b;
+        --color-linear:         #5e6ad2;
+        --color-linear-hover:   #6b77e8;
+        --color-text-primary:   #eeeeee;
+        --color-text-secondary: #8a8f98;
+        --color-border:         rgba(255,255,255,0.08);
+        --shadow-glow:          0 0 20px rgba(94,106,210,0.3);
+        --shadow-glow-lg:       0 0 40px rgba(94,106,210,0.25);
+      }
+
+      /* ── Tipografia de exibição ── */
+      .text-display {
+        font-size: 56px;
+        font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+      }
+      .text-h1 {
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+      @media (max-width: 640px) {
+        .text-display { font-size: 36px; }
+        .text-h1      { font-size: 26px; }
+      }
+      @media (min-width: 641px) and (max-width: 1023px) {
+        .text-display { font-size: 44px; }
+      }
+
+      /* ── Superfície com borda sutil ── */
+      .surface-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+      }
+
+      /* ── Botão primário Linear ── */
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: var(--color-linear);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
+        border-radius: 8px;
+        padding: 10px 18px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .btn-primary:hover  { background: var(--color-linear-hover); box-shadow: var(--shadow-glow); }
+      .btn-primary:active { transform: scale(0.97); }
+      .btn-primary:focus-visible { outline: 2px solid var(--color-linear); outline-offset: 3px; }
+
+      /* ── Botão secundário Linear ── */
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: transparent;
+        color: var(--color-text-secondary);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
+        border-radius: 8px;
+        padding: 10px 18px;
+        border: 1px solid var(--color-border);
+        cursor: pointer;
+        transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .btn-secondary:hover { color: var(--color-text-primary); background: var(--color-surface-hover); border-color: rgba(255,255,255,0.16); }
+      .btn-secondary:focus-visible { outline: 2px solid var(--color-linear); outline-offset: 3px; }
+
+      /* ── Borda sutil ── */
+      .border-subtle { border-color: var(--color-border); }
+
+      /* ── Noise texture sutil no fundo ── */
+      .noise-bg::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+        opacity: 0.4;
+      }
+
+      /* ── Gradiente radial de acento no topo ── */
+      .hero-glow {
+        position: absolute;
+        top: -160px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 900px;
+        height: 600px;
+        background: radial-gradient(ellipse at center, rgba(94,106,210,0.18) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ── Linha divisória com fade ── */
+      .divider {
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--color-border) 20%, var(--color-border) 80%, transparent);
+      }
+
+      /* ── Pill / Badge ── */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(94,106,210,0.1);
+        border: 1px solid rgba(94,106,210,0.25);
+        border-radius: 9999px;
+        padding: 4px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #8a8f98;
+        letter-spacing: 0.01em;
+      }
+      .badge .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 9999px;
+        background: var(--color-linear);
+        flex-shrink: 0;
+      }
+
+      /* ── FAQ accordion ── */
+      details summary { list-style: none; cursor: pointer; }
+      details summary::-webkit-details-marker { display: none; }
+      details[open] .faq-chevron { transform: rotate(180deg); }
+      .faq-chevron { transition: transform 0.2s ease; }
+
+      /* ── Progress bar fill ── */
+      .progress-fill {
+        height: 100%;
+        border-radius: 9999px;
+        background: var(--color-linear);
+      }
+
+      /* ── Nav link ── */
+      .nav-link {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        transition: color 0.15s ease;
+        padding: 4px 0;
+      }
+      .nav-link:hover { color: var(--color-text-primary); }
+      .nav-link:focus-visible { outline: 2px solid var(--color-linear); outline-offset: 3px; border-radius: 4px; }
+
+      /* ── Feature card icon wrapper ── */
+      .feature-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(94,106,210,0.12);
+        border: 1px solid rgba(94,106,210,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-linear);
+        flex-shrink: 0;
+        transition: background 0.15s ease, border-color 0.15s ease;
+      }
+      .feature-card:hover .feature-icon {
+        background: rgba(94,106,210,0.2);
+        border-color: rgba(94,106,210,0.4);
+      }
+
+      /* ── KPI highlight ── */
+      .kpi-value {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        color: var(--color-text-primary);
+        line-height: 1;
+      }
+      .kpi-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        margin-top: 6px;
+      }
     </style>
   </head>
-  <body class="bg-slate-900 text-slate-100 selection:bg-brand-500 selection:text-white">
-    <!-- Efeito de Luz de Fundo com Gradiente Sutil -->
-    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-250 h-125 bg-linear-to-tr from-brand-600/20 to-violet-500/10 blur-3xl rounded-full"></div>
-      <div class="absolute top-160 -left-20 w-150 h-100 bg-brand-500/10 blur-3xl rounded-full"></div>
+
+  <!-- ================================================================
+       BODY
+       ================================================================ -->
+  <body class="noise-bg">
+
+    <!-- ── BACKGROUND GLOW LAYERS ──────────────────────────────── -->
+    <div aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <!-- Glow central topo -->
+      <div style="
+        position:absolute; top:-200px; left:50%; transform:translateX(-50%);
+        width:1000px; height:700px;
+        background:radial-gradient(ellipse at center, rgba(94,106,210,0.14) 0%, transparent 68%);
+      "></div>
+      <!-- Glow lateral esquerdo -->
+      <div style="
+        position:absolute; top:60%; left:-200px;
+        width:600px; height:600px;
+        background:radial-gradient(ellipse at center, rgba(94,106,210,0.07) 0%, transparent 70%);
+      "></div>
     </div>
 
-    <!-- Cabecalho Semantico com Efeito Vidro (Glassmorphism) -->
-    <header class="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-slate-900/80 backdrop-blur-xl transition-all">
-      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <!-- Logotipo e Marca -->
-        <a href="#" class="group flex items-center gap-3 text-lg font-bold tracking-tight text-white focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-lg p-1">
-          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-tr from-brand-600 to-violet-500 text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- ================================================================
+         HEADER — Glassmorphism Linear
+         ================================================================ -->
+    <header
+      role="banner"
+      style="
+        position: sticky; top: 0; z-index: 50; width: 100%;
+        background: rgba(15,15,19,0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--color-border);
+      "
+    >
+      <div style="max-width:1280px; margin:0 auto; padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; gap:16px;">
+
+        <!-- Logotipo -->
+        <a
+          href="#"
+          aria-label="PlatformHub — página inicial"
+          style="display:flex; align-items:center; gap:10px; text-decoration:none; flex-shrink:0;"
+          class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-linear"
+        >
+          <span style="
+            width:28px; height:28px; border-radius:6px;
+            background: var(--color-linear);
+            display:flex; align-items:center; justify-content:center;
+            box-shadow: var(--shadow-glow);
+          ">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
               <polyline points="2 17 12 22 22 17"></polyline>
               <polyline points="2 12 12 17 22 12"></polyline>
             </svg>
           </span>
-          <span class="text-xl">Platform<span class="text-brand-400">Hub</span></span>
+          <span style="font-size:15px; font-weight:600; color:#eeeeee; letter-spacing:-0.01em;">
+            Platform<span style="color:var(--color-linear);">Hub</span>
+          </span>
         </a>
 
-        <!-- Navegacao Principal -->
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <a href="#recursos" class="hover:text-white transition-colors">Recursos</a>
-          <a href="#demonstracao" class="hover:text-white transition-colors">Interface</a>
-          <a href="#depoimentos" class="hover:text-white transition-colors">Depoimentos</a>
-          <a href="#faq" class="hover:text-white transition-colors">Perguntas Frequentes</a>
+        <!-- Nav principal (desktop) -->
+        <nav aria-label="Navegação principal" style="display:flex; align-items:center; gap:28px;" class="hidden md:flex">
+          <a href="#recursos"     class="nav-link">Recursos</a>
+          <a href="#demonstracao" class="nav-link">Interface</a>
+          <a href="#depoimentos"  class="nav-link">Depoimentos</a>
+          <a href="#faq"          class="nav-link">FAQ</a>
         </nav>
 
-        <!-- Acoes de Acesso direcionando para a pasta /app -->
-        <div class="flex items-center gap-4">
-          <a
-            href="/app"
-            class="text-sm font-semibold text-slate-300 hover:text-white transition-colors px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-          >
-            Entrar
-          </a>
-          <a
-            href="/app"
-            class="inline-flex items-center justify-center rounded-xl bg-linear-to-r from-brand-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-600/30 hover:shadow-brand-600/50 hover:brightness-110 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-brand-500"
-          >
+        <!-- Ações -->
+        <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+          <a href="/app" class="btn-secondary hidden sm:inline-flex">Entrar</a>
+          <a href="/app" class="btn-primary">
             Acessar Sistema
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
           </a>
         </div>
       </div>
     </header>
 
+    <!-- ================================================================
+         MAIN
+         ================================================================ -->
     <main id="conteudo-principal">
-      <!-- Seção Hero Banner -->
-      <section class="relative pt-24 pb-20 lg:pt-32 lg:pb-28">
-        <div class="mx-auto max-w-7xl px-6 text-center">
-          <!-- Selo Informativo de Versao -->
-          <div class="inline-flex items-center gap-2.5 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold text-brand-300 mb-8 backdrop-blur-md">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+
+      <!-- ============================================================
+           SEÇÃO 1 — HERO
+           ============================================================ -->
+      <section
+        aria-labelledby="hero-heading"
+        style="position:relative; padding-top:96px; padding-bottom:80px; overflow:hidden;"
+      >
+        <div aria-hidden="true" class="hero-glow"></div>
+
+        <div style="max-width:1280px; margin:0 auto; padding:0 24px; text-align:center; position:relative; z-index:1;">
+
+          <!-- Badge de versão -->
+          <div style="margin-bottom:32px;">
+            <span class="badge" role="status">
+              <span class="badge-dot" aria-hidden="true"></span>
+              Versão 2.0 — Auth JWT, PostgreSQL Dual, CI/CD
             </span>
-            Versão 2.0: Autenticação JWT, Postgres Dual e Deploy Contínuo
           </div>
 
-          <!-- Titulo Principal H1 com Gradiente de Texto -->
-          <h1 class="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl leading-tight sm:leading-none">
-            Acelere suas entregas com
-            <span class="text-transparent bg-clip-text bg-linear-to-r from-brand-400 via-indigo-300 to-violet-400">
-              agilidade e excelência técnica
-            </span>
+          <!-- Headline display -->
+          <h1
+            id="hero-heading"
+            class="text-display"
+            style="
+              max-width:720px; margin:0 auto;
+              color: var(--color-text-primary);
+            "
+          >
+            Acelere entregas com<br>
+            <span style="color:var(--color-linear);">agilidade técnica</span>
           </h1>
 
-          <!-- Subtitulo de Impacto -->
-          <p class="mx-auto mt-7 max-w-2xl text-lg text-slate-400 leading-relaxed font-normal">
-            Orquestração unificada de squads, visibilidade de sprints ponta a ponta e governança robusta com stack moderna em Node.js, React e TypeScript.
+          <!-- Subtítulo -->
+          <p style="
+            max-width:520px; margin:24px auto 0;
+            font-size:16px; line-height:1.65;
+            color:var(--color-text-secondary);
+          ">
+            Orquestração unificada de squads, visibilidade de sprints ponta a ponta e governança robusta — stack Node.js, React e TypeScript.
           </p>
 
-          <!-- Chamadas para Acao (CTAs com link para /app) -->
-          <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="/app"
-              class="inline-flex items-center gap-2.5 rounded-xl bg-linear-to-r from-brand-600 to-indigo-600 px-7 py-4 text-base font-semibold text-white shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 hover:brightness-110 active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-brand-500"
-            >
+          <!-- CTAs -->
+          <div style="margin-top:40px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px;">
+            <a href="/app" class="btn-primary" style="padding:12px 24px; font-size:15px;">
               Começar Gratuitamente
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
-
-            <a
-              href="#demonstracao"
-              class="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-7 py-4 text-base font-semibold text-slate-200 hover:bg-slate-800 hover:text-white transition-all backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-slate-600"
-            >
-              Explorar Painel
+            <a href="#demonstracao" class="btn-secondary" style="padding:12px 24px; font-size:15px;">
+              Ver Interface
             </a>
           </div>
 
-          <!-- Metricas de Validacao Social -->
-          <div class="mt-16 grid grid-cols-2 gap-6 border-t border-slate-800 pt-10 sm:grid-cols-4 max-w-4xl mx-auto">
-            <div class="p-3">
-              <p class="text-3xl font-extrabold text-white tracking-tight">+10.000</p>
-              <p class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-medium">Usuários Ativos</p>
+          <!-- ── MÉTRICAS / SOCIAL PROOF ───────────────────────── -->
+          <div
+            role="list"
+            aria-label="Métricas da plataforma"
+            style="
+              margin-top:72px; padding-top:40px;
+              border-top:1px solid var(--color-border);
+              display:grid; grid-template-columns:repeat(2,1fr);
+              gap:32px; max-width:640px; margin-left:auto; margin-right:auto;
+            "
+            class="sm:grid-cols-4"
+          >
+            <div role="listitem" style="text-align:center;">
+              <p class="kpi-value">+10 mil</p>
+              <p class="kpi-label">Usuários Ativos</p>
             </div>
-            <div class="p-3">
-              <p class="text-3xl font-extrabold text-white tracking-tight">99.9%</p>
-              <p class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-medium">Uptime Garantido</p>
+            <div role="listitem" style="text-align:center;">
+              <p class="kpi-value">99.9%</p>
+              <p class="kpi-label">Uptime</p>
             </div>
-            <div class="p-3">
-              <p class="text-3xl font-extrabold text-white tracking-tight">&lt; 80ms</p>
-              <p class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-medium">Latência de API</p>
+            <div role="listitem" style="text-align:center;">
+              <p class="kpi-value">&lt;80 ms</p>
+              <p class="kpi-label">Latência de API</p>
             </div>
-            <div class="p-3">
-              <p class="text-3xl font-extrabold text-white tracking-tight">4.9 / 5.0</p>
-              <p class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-medium">Satisfação Técnica</p>
+            <div role="listitem" style="text-align:center;">
+              <p class="kpi-value">4.9 / 5</p>
+              <p class="kpi-label">Satisfação</p>
             </div>
           </div>
+          <!-- /métricas -->
+
         </div>
       </section>
 
-      <!-- Mockup Visual da Interface do Sistema (/app) -->
-      <section id="demonstracao" class="relative py-12">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="relative rounded-2xl border border-slate-700/80 bg-slate-950/70 p-3 shadow-2xl shadow-brand-950/50 backdrop-blur-xl">
-            <!-- Barra de Navegador Simulada -->
-            <div class="flex items-center justify-between border-b border-slate-800 px-4 py-3 text-xs text-slate-400">
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-3 rounded-full bg-rose-500/80"></span>
-                <span class="h-3 w-3 rounded-full bg-amber-500/80"></span>
-                <span class="h-3 w-3 rounded-full bg-emerald-500/80"></span>
+      <!-- ============================================================
+           SEÇÃO 2 — MOCKUP DO DASHBOARD
+           ============================================================ -->
+      <section
+        id="demonstracao"
+        aria-labelledby="demo-heading"
+        style="padding:16px 24px 80px;"
+      >
+        <!-- Screen-reader label -->
+        <h2 id="demo-heading" class="sr-only">Interface do painel</h2>
+
+        <div style="max-width:960px; margin:0 auto;">
+
+          <!-- Janela simulada do browser -->
+          <div
+            role="img"
+            aria-label="Captura de tela ilustrativa do painel PlatformHub"
+            style="
+              border-radius:12px;
+              border:1px solid var(--color-border);
+              background: var(--color-surface);
+              overflow:hidden;
+              box-shadow: 0 24px 80px rgba(0,0,0,0.5), var(--shadow-glow-lg);
+            "
+          >
+            <!-- Barra do browser -->
+            <div style="
+              display:flex; align-items:center; justify-content:space-between;
+              padding:12px 16px;
+              border-bottom:1px solid var(--color-border);
+              background:#0f0f13;
+            ">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;" aria-hidden="true"></span>
+                <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;" aria-hidden="true"></span>
+                <span style="width:10px;height:10px;border-radius:50%;background:#28c840;" aria-hidden="true"></span>
               </div>
-              <div class="rounded-md bg-slate-900 border border-slate-800 px-6 py-1 font-mono text-xs text-slate-400">
+              <div style="
+                font-family:var(--font-mono, 'SFMono-Regular', Menlo, monospace);
+                font-size:11px; color:var(--color-text-secondary);
+                background:var(--color-surface); border:1px solid var(--color-border);
+                border-radius:6px; padding:4px 14px;
+              ">
                 https://app.platformhub.io/dashboard
               </div>
-              <div class="h-3 w-3"></div>
+              <div style="width:44px;"></div>
             </div>
 
-            <!-- Corpo da Interface Ilustrativa -->
-            <div class="p-6 md:p-8 space-y-6">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <!-- Conteúdo do painel -->
+            <div style="padding:24px 28px; display:flex; flex-direction:column; gap:20px;">
+
+              <!-- Header do painel -->
+              <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;">
                 <div>
-                  <h3 class="text-xl font-bold text-white">Painel da Squad • Sprint 14</h3>
-                  <p class="text-xs text-slate-400 mt-0.5">Visão consolidada de produtividade, commits e deploys ativos</p>
+                  <h3 style="font-size:17px; font-weight:600; letter-spacing:-0.01em; color:var(--color-text-primary); margin:0;">
+                    Squad Painel · Sprint 14
+                  </h3>
+                  <p style="font-size:12px; color:var(--color-text-secondary); margin:4px 0 0;">
+                    Visão consolidada de produtividade, commits e deploys
+                  </p>
                 </div>
-                <div>
-                  <span class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-xs font-semibold text-emerald-400">
-                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                    Produção Operacional
-                  </span>
-                </div>
+                <span style="
+                  display:inline-flex; align-items:center; gap:6px;
+                  background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2);
+                  border-radius:6px; padding:5px 10px;
+                  font-size:11px; font-weight:500; color:#4ade80;
+                ">
+                  <span style="width:5px;height:5px;border-radius:50%;background:#4ade80;" aria-hidden="true"></span>
+                  Produção Operacional
+                </span>
               </div>
 
-              <!-- Cartões de KPI -->
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <p class="text-xs font-medium text-slate-400">Issues Concluídas</p>
-                  <p class="text-2xl font-bold text-white mt-1">42 / 48</p>
-                  <div class="mt-3 w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-brand-500 h-1.5 rounded-full" style="width: 87%"></div>
+              <!-- KPI Cards -->
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px;">
+
+                <!-- Card 1 -->
+                <div style="
+                  background:#0f0f13; border:1px solid var(--color-border);
+                  border-radius:8px; padding:16px;
+                ">
+                  <p style="font-size:11px; color:var(--color-text-secondary); margin:0 0 8px;">Issues Concluídas</p>
+                  <p style="font-size:22px; font-weight:600; letter-spacing:-0.02em; color:var(--color-text-primary); margin:0 0 10px;">42 / 48</p>
+                  <div style="height:4px; background:rgba(255,255,255,0.06); border-radius:9999px; overflow:hidden;">
+                    <div class="progress-fill" style="width:87%;"></div>
                   </div>
+                  <p style="font-size:11px; color:var(--color-text-secondary); margin:6px 0 0;">87% concluído</p>
                 </div>
 
-                <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <p class="text-xs font-medium text-slate-400">Tempo Médio de Resolução</p>
-                  <p class="text-2xl font-bold text-white mt-1">1.8 dias</p>
-                  <p class="text-xs text-emerald-400 mt-2">↓ 24% em relação à sprint anterior</p>
+                <!-- Card 2 -->
+                <div style="
+                  background:#0f0f13; border:1px solid var(--color-border);
+                  border-radius:8px; padding:16px;
+                ">
+                  <p style="font-size:11px; color:var(--color-text-secondary); margin:0 0 8px;">Tempo Médio de Resolução</p>
+                  <p style="font-size:22px; font-weight:600; letter-spacing:-0.02em; color:var(--color-text-primary); margin:0 0 10px;">1.8 dias</p>
+                  <p style="font-size:11px; color:#4ade80; margin:0;">↓ 24% vs. sprint anterior</p>
                 </div>
 
-                <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <p class="text-xs font-medium text-slate-400">Taxa de Sucesso em CI/CD</p>
-                  <p class="text-2xl font-bold text-white mt-1">99.4%</p>
-                  <p class="text-xs text-brand-400 mt-2">✓ 138 builds aprovados sem falhas</p>
+                <!-- Card 3 -->
+                <div style="
+                  background:#0f0f13; border:1px solid var(--color-border);
+                  border-radius:8px; padding:16px;
+                ">
+                  <p style="font-size:11px; color:var(--color-text-secondary); margin:0 0 8px;">Taxa de Sucesso CI/CD</p>
+                  <p style="font-size:22px; font-weight:600; letter-spacing:-0.02em; color:var(--color-text-primary); margin:0 0 10px;">99.4%</p>
+                  <p style="font-size:11px; color:var(--color-linear); margin:0;">✓ 138 builds aprovados</p>
                 </div>
+
               </div>
+              <!-- /KPI Cards -->
+
             </div>
           </div>
+          <!-- /janela browser -->
+
         </div>
       </section>
 
-      <!-- Mockup Visual da Interface do Sistema (/app) -->
-      <section id="demonstracao" class="relative py-12">
-        <div class="mx-auto max-w-6xl px-6">
-          <div class="relative rounded-2xl border border-slate-700/80 bg-slate-950/70 p-3 shadow-2xl shadow-brand-950/50 backdrop-blur-xl">
-            <!-- Barra de Navegador Simulada -->
-            <div class="flex items-center justify-between border-b border-slate-800 px-4 py-3 text-xs text-slate-400">
-              <div class="flex items-center gap-2">
-                <span class="h-3 w-3 rounded-full bg-rose-500/80"></span>
-                <span class="h-3 w-3 rounded-full bg-amber-500/80"></span>
-                <span class="h-3 w-3 rounded-full bg-emerald-500/80"></span>
-              </div>
-              <div class="rounded-md bg-slate-900 border border-slate-800 px-6 py-1 font-mono text-xs text-slate-400">
-                https://app.platformhub.io/dashboard
-              </div>
-              <div class="h-3 w-3"></div>
-            </div>
+      <!-- ============================================================
+           SEÇÃO 3 — GRADE DE RECURSOS
+           ============================================================ -->
+      <section
+        id="recursos"
+        aria-labelledby="recursos-heading"
+        style="padding:80px 24px; border-top:1px solid var(--color-border);"
+      >
+        <div style="max-width:1280px; margin:0 auto;">
 
-            <!-- Corpo da Interface Ilustrativa -->
-            <div class="p-6 md:p-8 space-y-6">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <h3 class="text-xl font-bold text-white">Painel da Squad • Sprint 14</h3>
-                  <p class="text-xs text-slate-400 mt-0.5">Visão consolidada de produtividade, commits e deploys ativos</p>
-                </div>
-                <div>
-                  <span class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-xs font-semibold text-emerald-400">
-                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                    Produção Operacional
-                  </span>
-                </div>
-              </div>
-
-              <!-- Cartões de KPI -->
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <p class="text-xs font-medium text-slate-400">Issues Concluídas</p>
-                  <p class="text-2xl font-bold text-white mt-1">42 / 48</p>
-                  <div class="mt-3 w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-brand-500 h-1.5 rounded-full" style="width: 87%"></div>
-                  </div>
-                </div>
-
-                <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <p class="text-xs font-medium text-slate-400">Tempo Médio de Resolução</p>
-                  <p class="text-2xl font-bold text-white mt-1">1.8 dias</p>
-                  <p class="text-xs text-emerald-400 mt-2">↓ 24% em relação à sprint anterior</p>
-                </div>
-
-                <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <p class="text-xs font-medium text-slate-400">Taxa de Sucesso em CI/CD</p>
-                  <p class="text-2xl font-bold text-white mt-1">99.4%</p>
-                  <p class="text-xs text-brand-400 mt-2">✓ 138 builds aprovados sem falhas</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Grade de Recursos e Funcionalidades -->
-      <section id="recursos" class="py-24 border-t border-slate-800">
-        <div class="mx-auto max-w-7xl px-6">
-          <div class="text-center max-w-2xl mx-auto">
-            <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+          <!-- Cabeçalho da seção -->
+          <div style="max-width:480px; margin-bottom:48px;">
+            <p style="font-size:12px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-linear); margin:0 0 12px;">Plataforma</p>
+            <h2 id="recursos-heading" class="text-h1" style="color:var(--color-text-primary); margin:0 0 16px;">
               Arquitetura sólida para equipes de alta performance
             </h2>
-            <p class="mt-4 text-base text-slate-400">
-              Cada componente foi planejado para maximizar a autonomia das squads e a governança de software.
+            <p style="font-size:15px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
+              Cada componente foi desenhado para maximizar a autonomia das squads e a governança de software.
             </p>
           </div>
 
-          <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Recurso 1: Autenticacao -->
-            <article class="rounded-2xl border border-slate-800 bg-slate-900/50 p-7 hover:border-brand-500/40 hover:bg-slate-900/80 transition-all group">
-              <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400 group-hover:bg-brand-500 group-hover:text-white transition-all">
-                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Grid de features -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1px; background:var(--color-border); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+
+            <!-- Feature 1 -->
+            <article
+              class="feature-card"
+              style="background:var(--color-surface); padding:28px; transition:background 0.15s ease;"
+              onmouseover="this.style.background='var(--color-surface-hover)'"
+              onmouseout="this.style.background='var(--color-surface)'"
+            >
+              <div class="feature-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
               </div>
-              <h3 class="mt-5 text-lg font-bold text-white">Autenticação JWT Segura</h3>
-              <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+              <h3 style="font-size:14px; font-weight:600; color:var(--color-text-primary); margin:16px 0 8px; letter-spacing:-0.01em;">Autenticação JWT Segura</h3>
+              <p style="font-size:13px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
                 Tokens criptografados com suporte a refresh, controle de papéis por usuário e middleware de proteção no Express.
               </p>
             </article>
 
-            <!-- Recurso 2: Roteamento -->
-            <article class="rounded-2xl border border-slate-800 bg-slate-900/50 p-7 hover:border-brand-500/40 hover:bg-slate-900/80 transition-all group">
-              <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all">
-                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Feature 2 -->
+            <article
+              class="feature-card"
+              style="background:var(--color-surface); padding:28px; transition:background 0.15s ease;"
+              onmouseover="this.style.background='var(--color-surface-hover)'"
+              onmouseout="this.style.background='var(--color-surface)'"
+            >
+              <div class="feature-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
                   <line x1="4" y1="22" x2="4" y2="15"></line>
                 </svg>
               </div>
-              <h3 class="mt-5 text-lg font-bold text-white">Roteamento e Guard Routes</h3>
-              <p class="mt-2 text-sm text-slate-400 leading-relaxed">
-                Proteção declarativa de telas no cliente utilizando React Router e Context API para gestão global da sessão.
+              <h3 style="font-size:14px; font-weight:600; color:var(--color-text-primary); margin:16px 0 8px; letter-spacing:-0.01em;">Roteamento e Guard Routes</h3>
+              <p style="font-size:13px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
+                Proteção declarativa de telas no cliente com React Router e Context API para gestão global de sessão.
               </p>
             </article>
 
-            <!-- Recurso 3: Banco Dual -->
-            <article class="rounded-2xl border border-slate-800 bg-slate-900/50 p-7 hover:border-brand-500/40 hover:bg-slate-900/80 transition-all group">
-              <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 group-hover:bg-violet-500 group-hover:text-white transition-all">
-                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Feature 3 -->
+            <article
+              class="feature-card"
+              style="background:var(--color-surface); padding:28px; transition:background 0.15s ease;"
+              onmouseover="this.style.background='var(--color-surface-hover)'"
+              onmouseout="this.style.background='var(--color-surface)'"
+            >
+              <div class="feature-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
                   <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
                   <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
                 </svg>
               </div>
-              <h3 class="mt-5 text-lg font-bold text-white">PostgreSQL Dual</h3>
-              <p class="mt-2 text-sm text-slate-400 leading-relaxed">
-                Flexibilidade absoluta com Sequelize ORM: execute testes locais em Docker ou sincronize na nuvem com Supabase.
+              <h3 style="font-size:14px; font-weight:600; color:var(--color-text-primary); margin:16px 0 8px; letter-spacing:-0.01em;">PostgreSQL Dual</h3>
+              <p style="font-size:13px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
+                Flexibilidade com Sequelize ORM: testes locais em Docker ou sincronização na nuvem com Supabase.
               </p>
             </article>
+
+            <!-- Feature 4 -->
+            <article
+              class="feature-card"
+              style="background:var(--color-surface); padding:28px; transition:background 0.15s ease;"
+              onmouseover="this.style.background='var(--color-surface-hover)'"
+              onmouseout="this.style.background='var(--color-surface)'"
+            >
+              <div class="feature-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+              </div>
+              <h3 style="font-size:14px; font-weight:600; color:var(--color-text-primary); margin:16px 0 8px; letter-spacing:-0.01em;">Monitoramento em Tempo Real</h3>
+              <p style="font-size:13px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
+                Métricas de latência, throughput e taxa de erros expostas em dashboards com atualização automática.
+              </p>
+            </article>
+
+            <!-- Feature 5 -->
+            <article
+              class="feature-card"
+              style="background:var(--color-surface); padding:28px; transition:background 0.15s ease;"
+              onmouseover="this.style.background='var(--color-surface-hover)'"
+              onmouseout="this.style.background='var(--color-surface)'"
+            >
+              <div class="feature-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"></path>
+                </svg>
+              </div>
+              <h3 style="font-size:14px; font-weight:600; color:var(--color-text-primary); margin:16px 0 8px; letter-spacing:-0.01em;">CI/CD Automatizado</h3>
+              <p style="font-size:13px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
+                Pipelines com GitHub Actions disparando testes, builds e deploys exclusivamente na pasta alterada.
+              </p>
+            </article>
+
+            <!-- Feature 6 -->
+            <article
+              class="feature-card"
+              style="background:var(--color-surface); padding:28px; transition:background 0.15s ease;"
+              onmouseover="this.style.background='var(--color-surface-hover)'"
+              onmouseout="this.style.background='var(--color-surface)'"
+            >
+              <div class="feature-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </div>
+              <h3 style="font-size:14px; font-weight:600; color:var(--color-text-primary); margin:16px 0 8px; letter-spacing:-0.01em;">Monorepo Estruturado</h3>
+              <p style="font-size:13px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
+                Landing, app e backend em um único repositório pnpm com Docker Compose para ambiente local completo.
+              </p>
+            </article>
+
           </div>
+          <!-- /grid features -->
+
         </div>
       </section>
 
-      <!-- Prova Social e Depoimentos -->
-      <section id="depoimentos" class="py-24 bg-slate-950/60 border-t border-slate-800">
-        <div class="mx-auto max-w-7xl px-6">
-          <div class="text-center max-w-2xl mx-auto">
-            <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+      <!-- ============================================================
+           SEÇÃO 4 — DEPOIMENTOS
+           ============================================================ -->
+      <section
+        id="depoimentos"
+        aria-labelledby="depoimentos-heading"
+        style="padding:80px 24px; border-top:1px solid var(--color-border);"
+      >
+        <div style="max-width:1280px; margin:0 auto;">
+
+          <div style="max-width:480px; margin-bottom:48px;">
+            <p style="font-size:12px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-linear); margin:0 0 12px;">Depoimentos</p>
+            <h2 id="depoimentos-heading" class="text-h1" style="color:var(--color-text-primary); margin:0 0 16px;">
               Aprovado por quem desenvolve na prática
             </h2>
-            <p class="mt-4 text-base text-slate-400">
-              Relatos reais de engenheiros que utilizam a arquitetura para acelerar projetos web.
+            <p style="font-size:15px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
+              Relatos de engenheiros que usam a arquitetura para acelerar projetos web.
             </p>
           </div>
 
-          <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <article class="rounded-2xl border border-slate-800 bg-slate-900/40 p-7 flex flex-col justify-between">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;">
+
+            <!-- Depoimento 1 -->
+            <article style="
+              background:var(--color-surface);
+              border:1px solid var(--color-border);
+              border-radius:12px; padding:24px;
+              display:flex; flex-direction:column; justify-content:space-between;
+              gap:20px;
+            ">
               <div>
-                <div class="flex items-center gap-1 text-amber-400">
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                <!-- Estrelas -->
+                <div style="display:flex; gap:3px;" aria-label="5 estrelas">
+                  <span style="color:#f59e0b; font-size:13px;" aria-hidden="true">★★★★★</span>
                 </div>
-                <p class="mt-4 text-sm text-slate-300 leading-relaxed italic">
-                  "O desacoplamento da landing no Pages e o app principal garantiu velocidade máxima e clareza para a apresentação do projeto."
-                </p>
+                <blockquote style="margin:14px 0 0;">
+                  <p style="font-size:14px; color:#c8c8cc; line-height:1.7; margin:0; font-style:normal;">
+                    "O desacoplamento da landing no Pages e o app principal garantiu velocidade máxima e clareza para a apresentação do projeto."
+                  </p>
+                </blockquote>
               </div>
-              <div class="mt-6 flex items-center gap-3 pt-6 border-t border-slate-800">
-                <div class="h-10 w-10 rounded-full bg-brand-600/30 border border-brand-500/50 flex items-center justify-center font-bold text-brand-300 text-sm">
-                  GF
-                </div>
+              <footer style="display:flex; align-items:center; gap:12px; padding-top:16px; border-top:1px solid var(--color-border);">
+                <div style="
+                  width:36px; height:36px; border-radius:50%;
+                  background:rgba(94,106,210,0.15); border:1px solid rgba(94,106,210,0.3);
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:12px; font-weight:600; color:var(--color-linear);
+                  flex-shrink:0;
+                " aria-hidden="true">GF</div>
                 <div>
-                  <h3 class="text-sm font-semibold text-white">Gabriel Ferreira</h3>
-                  <p class="text-xs text-slate-400">Desenvolvedor Full Stack</p>
+                  <cite style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-style:normal;">Gabriel Ferreira</cite>
+                  <p style="font-size:11px; color:var(--color-text-secondary); margin:2px 0 0;">Desenvolvedor Full Stack</p>
                 </div>
-              </div>
+              </footer>
             </article>
 
-            <article class="rounded-2xl border border-slate-800 bg-slate-900/40 p-7 flex flex-col justify-between">
+            <!-- Depoimento 2 -->
+            <article style="
+              background:var(--color-surface);
+              border:1px solid var(--color-border);
+              border-radius:12px; padding:24px;
+              display:flex; flex-direction:column; justify-content:space-between;
+              gap:20px;
+            ">
               <div>
-                <div class="flex items-center gap-1 text-amber-400">
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                <div style="display:flex; gap:3px;" aria-label="5 estrelas">
+                  <span style="color:#f59e0b; font-size:13px;" aria-hidden="true">★★★★★</span>
                 </div>
-                <p class="mt-4 text-sm text-slate-300 leading-relaxed italic">
-                  "Pontuação máxima no Lighthouse em SEO e Acessibilidade obtida diretamente através da semântica limpa."
-                </p>
+                <blockquote style="margin:14px 0 0;">
+                  <p style="font-size:14px; color:#c8c8cc; line-height:1.7; margin:0; font-style:normal;">
+                    "Pontuação máxima no Lighthouse em SEO e Acessibilidade obtida diretamente pela semântica limpa do projeto."
+                  </p>
+                </blockquote>
               </div>
-              <div class="mt-6 flex items-center gap-3 pt-6 border-t border-slate-800">
-                <div class="h-10 w-10 rounded-full bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center font-bold text-indigo-300 text-sm">
-                  LA
-                </div>
+              <footer style="display:flex; align-items:center; gap:12px; padding-top:16px; border-top:1px solid var(--color-border);">
+                <div style="
+                  width:36px; height:36px; border-radius:50%;
+                  background:rgba(94,106,210,0.15); border:1px solid rgba(94,106,210,0.3);
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:12px; font-weight:600; color:var(--color-linear);
+                  flex-shrink:0;
+                " aria-hidden="true">LA</div>
                 <div>
-                  <h3 class="text-sm font-semibold text-white">Larissa Almeida</h3>
-                  <p class="text-xs text-slate-400">Scrum Master & QA</p>
+                  <cite style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-style:normal;">Larissa Almeida</cite>
+                  <p style="font-size:11px; color:var(--color-text-secondary); margin:2px 0 0;">Scrum Master &amp; QA</p>
                 </div>
-              </div>
+              </footer>
             </article>
 
-            <article class="rounded-2xl border border-slate-800 bg-slate-900/40 p-7 flex flex-col justify-between">
+            <!-- Depoimento 3 -->
+            <article style="
+              background:var(--color-surface);
+              border:1px solid var(--color-border);
+              border-radius:12px; padding:24px;
+              display:flex; flex-direction:column; justify-content:space-between;
+              gap:20px;
+            ">
               <div>
-                <div class="flex items-center gap-1 text-amber-400">
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                  <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                <div style="display:flex; gap:3px;" aria-label="5 estrelas">
+                  <span style="color:#f59e0b; font-size:13px;" aria-hidden="true">★★★★★</span>
                 </div>
-                <p class="mt-4 text-sm text-slate-300 leading-relaxed italic">
-                  "O pipeline dispara apenas ao alterar a pasta landing. Zero atrito para atualizar o portal público."
-                </p>
+                <blockquote style="margin:14px 0 0;">
+                  <p style="font-size:14px; color:#c8c8cc; line-height:1.7; margin:0; font-style:normal;">
+                    "O pipeline dispara apenas ao alterar a pasta landing. Zero atrito para atualizar o portal público."
+                  </p>
+                </blockquote>
               </div>
-              <div class="mt-6 flex items-center gap-3 pt-6 border-t border-slate-800">
-                <div class="h-10 w-10 rounded-full bg-violet-600/30 border border-violet-500/50 flex items-center justify-center font-bold text-violet-300 text-sm">
-                  MT
-                </div>
+              <footer style="display:flex; align-items:center; gap:12px; padding-top:16px; border-top:1px solid var(--color-border);">
+                <div style="
+                  width:36px; height:36px; border-radius:50%;
+                  background:rgba(94,106,210,0.15); border:1px solid rgba(94,106,210,0.3);
+                  display:flex; align-items:center; justify-content:center;
+                  font-size:12px; font-weight:600; color:var(--color-linear);
+                  flex-shrink:0;
+                " aria-hidden="true">MT</div>
                 <div>
-                  <h3 class="text-sm font-semibold text-white">Matheus Teles</h3>
-                  <p class="text-xs text-slate-400">Arquiteto de Software</p>
+                  <cite style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-style:normal;">Matheus Teles</cite>
+                  <p style="font-size:11px; color:var(--color-text-secondary); margin:2px 0 0;">Arquiteto de Software</p>
                 </div>
-              </div>
+              </footer>
             </article>
+
           </div>
         </div>
       </section>
 
+      <!-- ============================================================
+           SEÇÃO 5 — FAQ (nova seção — estava na nav, faltava no HTML)
+           ============================================================ -->
+      <section
+        id="faq"
+        aria-labelledby="faq-heading"
+        style="padding:80px 24px; border-top:1px solid var(--color-border);"
+      >
+        <div style="max-width:720px; margin:0 auto;">
+
+          <div style="margin-bottom:48px;">
+            <p style="font-size:12px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-linear); margin:0 0 12px;">FAQ</p>
+            <h2 id="faq-heading" class="text-h1" style="color:var(--color-text-primary); margin:0 0 16px;">
+              Perguntas frequentes
+            </h2>
+            <p style="font-size:15px; color:var(--color-text-secondary); line-height:1.65; margin:0;">
+              Dúvidas comuns sobre a plataforma e a stack técnica.
+            </p>
+          </div>
+
+          <!-- Accordion FAQ -->
+          <div style="display:flex; flex-direction:column; gap:1px; border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+
+            <!-- Item 1 -->
+            <details style="background:var(--color-surface);">
+              <summary style="
+                display:flex; align-items:center; justify-content:space-between;
+                padding:18px 20px; font-size:14px; font-weight:500;
+                color:var(--color-text-primary); user-select:none;
+                border-bottom:1px solid var(--color-border);
+              ">
+                <span>O PlatformHub é gratuito para usar?</span>
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </summary>
+              <div style="padding:16px 20px 20px; font-size:14px; color:var(--color-text-secondary); line-height:1.7;">
+                Sim. A plataforma foi desenvolvida como projeto acadêmico no curso DSM — FATEC e está disponível gratuitamente. O acesso ao painel completo é liberado após cadastro.
+              </div>
+            </details>
+
+            <!-- Item 2 -->
+            <details style="background:var(--color-surface);">
+              <summary style="
+                display:flex; align-items:center; justify-content:space-between;
+                padding:18px 20px; font-size:14px; font-weight:500;
+                color:var(--color-text-primary); user-select:none;
+                border-bottom:1px solid var(--color-border);
+              ">
+                <span>Qual stack técnica é utilizada?</span>
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </summary>
+              <div style="padding:16px 20px 20px; font-size:14px; color:var(--color-text-secondary); line-height:1.7;">
+                Backend em Node.js com Express e TypeScript, banco de dados PostgreSQL via Sequelize ORM (Docker local ou Supabase em nuvem), frontend em React com React Router, e CI/CD automatizado com GitHub Actions.
+              </div>
+            </details>
+
+            <!-- Item 3 -->
+            <details style="background:var(--color-surface);">
+              <summary style="
+                display:flex; align-items:center; justify-content:space-between;
+                padding:18px 20px; font-size:14px; font-weight:500;
+                color:var(--color-text-primary); user-select:none;
+                border-bottom:1px solid var(--color-border);
+              ">
+                <span>Como funciona a autenticação JWT?</span>
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </summary>
+              <div style="padding:16px 20px 20px; font-size:14px; color:var(--color-text-secondary); line-height:1.7;">
+                Ao fazer login, o servidor emite um access token (curto prazo) e um refresh token (longa duração). O frontend armazena os tokens de forma segura e o middleware Express valida o JWT em cada rota protegida. Ao expirar, o refresh token renova o acesso automaticamente.
+              </div>
+            </details>
+
+            <!-- Item 4 -->
+            <details style="background:var(--color-surface);">
+              <summary style="
+                display:flex; align-items:center; justify-content:space-between;
+                padding:18px 20px; font-size:14px; font-weight:500;
+                color:var(--color-text-primary); user-select:none;
+                border-bottom:1px solid var(--color-border);
+              ">
+                <span>Posso rodar o projeto localmente?</span>
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </summary>
+              <div style="padding:16px 20px 20px; font-size:14px; color:var(--color-text-secondary); line-height:1.7;">
+                Sim. Com Docker instalado, basta clonar o repositório e executar <code style="background:#0f0f13; border:1px solid var(--color-border); border-radius:4px; padding:2px 6px; font-family:monospace; font-size:12px;">docker-compose up --build</code> na raiz do monorepo. O banco PostgreSQL e o servidor sobem automaticamente.
+              </div>
+            </details>
+
+            <!-- Item 5 -->
+            <details style="background:var(--color-surface);">
+              <summary style="
+                display:flex; align-items:center; justify-content:space-between;
+                padding:18px 20px; font-size:14px; font-weight:500;
+                color:var(--color-text-primary); user-select:none;
+              ">
+                <span>O CI/CD roda para qualquer mudança no repositório?</span>
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </summary>
+              <div style="padding:16px 20px 20px; font-size:14px; color:var(--color-text-secondary); line-height:1.7;">
+                Não. Os workflows do GitHub Actions usam path filters para disparar apenas quando a pasta relevante é alterada — mudanças na <code style="background:#0f0f13; border:1px solid var(--color-border); border-radius:4px; padding:2px 6px; font-family:monospace; font-size:12px;">landing/</code> ativam o deploy do Pages; mudanças no <code style="background:#0f0f13; border:1px solid var(--color-border); border-radius:4px; padding:2px 6px; font-family:monospace; font-size:12px;">backend/</code> ativam o build da API.
+              </div>
+            </details>
+
+          </div>
+          <!-- /accordion -->
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SEÇÃO 6 — CTA FINAL
+           ============================================================ -->
+      <section
+        aria-labelledby="cta-heading"
+        style="padding:80px 24px; border-top:1px solid var(--color-border);"
+      >
+        <div style="max-width:1280px; margin:0 auto;">
+
+          <div style="
+            border-radius:12px;
+            border:1px solid rgba(94,106,210,0.2);
+            background: radial-gradient(ellipse at 50% 0%, rgba(94,106,210,0.12) 0%, transparent 70%), var(--color-surface);
+            padding:64px 32px;
+            text-align:center;
+            position:relative;
+            overflow:hidden;
+          ">
+            <!-- Glow decorativo interno -->
+            <div aria-hidden="true" style="
+              position:absolute; top:-80px; left:50%; transform:translateX(-50%);
+              width:600px; height:400px;
+              background:radial-gradient(ellipse at center, rgba(94,106,210,0.15) 0%, transparent 70%);
+              pointer-events:none;
+            "></div>
+
+            <div style="position:relative; z-index:1; max-width:520px; margin:0 auto;">
+              <h2
+                id="cta-heading"
+                class="text-h1"
+                style="color:var(--color-text-primary); margin:0 0 16px;"
+              >
+                Pronto para transformar a gestão dos seus projetos?
+              </h2>
+              <p style="font-size:15px; color:var(--color-text-secondary); line-height:1.65; margin:0 0 36px;">
+                Crie sua conta agora ou acesse o painel desenvolvido ao longo do semestre de Laboratório de Desenvolvimento Web.
+              </p>
+              <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px;">
+                <a href="/app" class="btn-primary" style="padding:12px 24px; font-size:15px;">
+                  Acessar Plataforma
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+                <a href="#recursos" class="btn-secondary" style="padding:12px 24px; font-size:15px;">Ver Recursos</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================================================================
+         FOOTER
+         ================================================================ -->
+    <footer
+      role="contentinfo"
+      style="
+        border-top:1px solid var(--color-border);
+        background:#0a0a0d;
+        padding:48px 24px 32px;
+      "
+    >
+      <div style="max-width:1280px; margin:0 auto;">
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:32px; margin-bottom:40px;">
+
+          <!-- Marca -->
+          <div style="grid-column:span 2;" class="sm:col-span-1">
+            <a href="#" style="display:flex; align-items:center; gap:8px; text-decoration:none; margin-bottom:12px;">
+              <span style="
+                width:24px; height:24px; border-radius:4px;
+                background:var(--color-linear);
+                display:flex; align-items:center; justify-content:center;
+              ">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </span>
+              <span style="font-size:14px; font-weight:600; color:var(--color-text-primary);">
+                Platform<span style="color:var(--color-linear);">Hub</span>
+              </span>
+            </a>
+            <p style="font-size:12px; color:var(--color-text-secondary); line-height:1.65; max-width:200px; margin:0;">
+              Plataforma desenvolvida no curso DSM — FATEC.
+            </p>
+          </div>
+
+          <!-- Nav -->
+          <div>
+            <h3 style="font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-text-secondary); margin:0 0 16px;">Navegação</h3>
+            <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;">
+              <li><a href="#recursos"     class="nav-link" style="font-size:13px;">Recursos</a></li>
+              <li><a href="#demonstracao" class="nav-link" style="font-size:13px;">Interface</a></li>
+              <li><a href="#depoimentos"  class="nav-link" style="font-size:13px;">Depoimentos</a></li>
+              <li><a href="#faq"          class="nav-link" style="font-size:13px;">FAQ</a></li>
+            </ul>
+          </div>
+
+          <!-- App -->
+          <div>
+            <h3 style="font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-text-secondary); margin:0 0 16px;">Aplicação</h3>
+            <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;">
+              <li><a href="/app" class="nav-link" style="font-size:13px;">Login</a></li>
+              <li><a href="/app" class="nav-link" style="font-size:13px;">Cadastro</a></li>
+              <li><a href="/app" class="nav-link" style="font-size:13px;">Painel</a></li>
+            </ul>
+          </div>
+
+          <!-- Conformidade -->
+          <div>
+            <h3 style="font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-text-secondary); margin:0 0 16px;">Conformidade</h3>
+            <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;">
+              <li><span style="font-size:13px; color:rgba(138,143,152,0.5);">Privacidade (LGPD)</span></li>
+              <li><span style="font-size:13px; color:rgba(138,143,152,0.5);">Termos de Uso</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Linha base -->
+        <div style="
+          border-top:1px solid var(--color-border);
+          padding-top:24px;
+          display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;
+          font-size:12px; color:rgba(138,143,152,0.5);
+        ">
+          <p style="margin:0;">© 2026 PlatformHub. Todos os direitos reservados. FATEC DSM.</p>
+          <p style="margin:0;">Hospedado via GitHub Pages com CI/CD automatizado.</p>
+        </div>
+
+      </div>
+    </footer>
+
+  </body>
+</html>

@@ -1,42 +1,53 @@
+# ==============================================================================
 # Estágio 1: Build da Aplicação
+# ==============================================================================
+FROM node:24-alpine AS builder
 
-# 1. Define a imagem de origem base 
-FROM node:20-alpine AS builder
-
-# instalção do pnpm globalmente para gerenciar as dependências
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
-# 2. Define diretório de trabalho interno do container
 WORKDIR /app
 
-# Copia dos manifestos de dependências do backend para o diretório de trabalho do container
-COPY package.json pnpm-lock.yaml ./
+# Instala o pnpm globalmente (evita problemas com corepack e semver)
+RUN npm install -g pnpm@latest
 
-# instalação de todas  as dependencias (incluindo devDependencies) do backend
+# Desativa a restrição do pnpm 11 antes da instalação
+RUN pnpm config set strict-dep-builds false
+
+# Copia os manifestos de dependências (hífen correto: pnpm-lock.yaml)
+COPY package.json pnpm-lock.yaml* ./
+
+# Instala todas as dependências (com frozen-lockfile correto)
 RUN pnpm install --frozen-lockfile
 
-# cópia do código-fonte e da configuração do typescript para o diretório de trabalho do container
+# Copia código-fonte e configuração do TypeScript
 COPY tsconfig.json ./
 COPY src ./src
 
-# compilação do TypeScript para JavaScript, gerando os arquivos de saída no diretório dist
+# Compila o TypeScript gerando a pasta dist/
 RUN pnpm run build
 
-# remoção das dependências de desenvolvimento para otimizar o tamanho da imagem final
+# Remove as devDependencies mantendo apenas o necessário para produção
 RUN pnpm prune --prod
 
-# Estágio 2: Criação da Imagem Final
-
-FROM node:20-alpine AS runtime
+# ==============================================================================
+# Estágio 2: Imagem Final de Execução (Produção enxuta)
+# ==============================================================================
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+ENV NODE_ENV=production
+ENV PORT=3000
 
-RUN pnpm install --frozen-lockfile --prod
+# Cria usuário sem privilégios de root para segurança
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nodejs
+
+# Copia apenas o necessário do estágio de build
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+
+USER nodejs
 
 EXPOSE 3000
 
-CMD ["node", "dist/index.js"]   
+CMD ["node", "dist/server.js"]
