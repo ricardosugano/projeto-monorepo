@@ -74,7 +74,7 @@ jobs:
           NODE_ENV: test
 
       - name: 9. Executar Análise Estática com SonarQube
-          uses: SonarSource/sonarqube-scan-action@v6
+        uses: SonarSource/sonarqube-scan-action@v6
         with:
           projectBaseDir: backend
         env:

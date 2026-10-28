@@ -7,7 +7,7 @@ on:
     types:
       - completed
     branches:
-      - main
+      - master
   # Permite disparo manual controlado pelo painel web do GitHub Actions
   workflow_dispatch:
 
