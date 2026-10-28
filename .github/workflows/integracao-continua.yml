@@ -79,7 +79,7 @@ jobs:
           projectBaseDir: backend
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
       - name: 10. Validar SonarQube Quality Gate
         uses: sonarsource/sonarqube-quality-gate-action@v1
@@ -89,7 +89,7 @@ jobs:
         continue-on-error: true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
       - name: 11. Publicar Relatório de Cobertura no Resumo do Job
         if: always()
